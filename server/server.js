@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 // backend/server.js
 app.use(cors({
-  origin: "http://localhost:5173", // URL ของ Frontend
+  origin: process.env.CLIENT_URL, // URL ของ Frontend
   credentials: true, // อนุญาตให้ส่ง Cookie (JWT)
 }));
 
