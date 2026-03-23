@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
@@ -18,20 +19,26 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
-      <div className="card w-full max-w-md bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="text-2xl font-bold text-center">Create Account</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="card w-full max-w-md bg-base-100 shadow-2xl">
+        <div className="card-body p-8">
+          <h2 className="text-3xl font-bold text-center text-primary mb-2">
+            Sign Up
+          </h2>
+          <p className="text-center text-base-content/60 mb-6">
+            Start managing your tasks today!
+          </p>
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Full Name</span>
+                <span className="label-text font-medium">Full Name</span>
               </label>
-              <div className="input input-bordered flex items-center gap-2">
-                <User size={18} />
+              <div className="input input-bordered flex items-center gap-3">
+                <User size={18} className="text-base-content/40" />
                 <input
                   type="text"
                   className="grow"
                   placeholder="John Doe"
+                  required
                   value={formData.fullName}
                   onChange={(e) =>
                     setFormData({ ...formData, fullName: e.target.value })
@@ -41,14 +48,15 @@ const SignUpPage = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text font-medium">Email Address</span>
               </label>
-              <div className="input input-bordered flex items-center gap-2">
-                <Mail size={18} />
+              <div className="input input-bordered flex items-center gap-3">
+                <Mail size={18} className="text-base-content/40" />
                 <input
                   type="email"
                   className="grow"
-                  placeholder="email@example.com"
+                  placeholder="you@example.com"
+                  required
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -58,14 +66,16 @@ const SignUpPage = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text font-medium">Password</span>
               </label>
-              <div className="input input-bordered flex items-center gap-2">
-                <Lock size={18} />
+              <div className="input input-bordered flex items-center gap-3">
+                <Lock size={18} className="text-base-content/40" />
                 <input
                   type="password"
                   className="grow"
                   placeholder="••••••••"
+                  required
+                  minLength={6}
                   value={formData.password}
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
@@ -73,13 +83,20 @@ const SignUpPage = () => {
                 />
               </div>
             </div>
-            <button className="btn btn-primary w-full" disabled={isSigningUp}>
-              {isSigningUp ? <Loader2 className="animate-spin" /> : "Sign Up"}
+            <button
+              className="btn btn-primary w-full text-lg mt-4"
+              disabled={isSigningUp}
+            >
+              {isSigningUp ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Create Account"
+              )}
             </button>
           </form>
-          <p className="text-center mt-4">
+          <p className="text-center mt-6 text-base-content/70">
             Already have an account?{" "}
-            <Link to="/login" className="link link-primary">
+            <Link to="/login" className="link link-primary font-medium">
               Login
             </Link>
           </p>

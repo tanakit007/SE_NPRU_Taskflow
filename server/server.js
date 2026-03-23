@@ -14,12 +14,11 @@ const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true,
-  }),
-);
+// backend/server.js
+app.use(cors({
+  origin: "http://localhost:5173", // URL ของ Frontend
+  credentials: true, // อนุญาตให้ส่ง Cookie (JWT)
+}));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
